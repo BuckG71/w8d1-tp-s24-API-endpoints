@@ -22,7 +22,8 @@ document.getElementById('weather-form').addEventListener('submit', function(even
                 weatherResult.innerHTML = `<p>${data.error}</p>`;
             } else {
                 weatherResult.innerHTML = `
-                    <h2>Current weather in ${data.city}</h2>
+                    <h2>Selected City: ${data.city}, ${data.region}</h2>
+                    <h3>Current weather conditions:</h3>
                     <p><strong>Temperature:</strong> ${data.temperature}°F</p>
                     <p><strong>Condition:</strong> ${data.condition}</p>
                     <p><strong>Humidity:</strong> ${data.humidity}%</p>

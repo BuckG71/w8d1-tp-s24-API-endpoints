@@ -1,6 +1,6 @@
-from flask import Flask, request, jsonify
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from flask import Flask, request, jsonify
 import requests
 from flask_cors import CORS
 
@@ -38,6 +38,7 @@ def get_weather():
         data = response.json()
         weather_data = {
             'city': data.get('location', {}).get('name'),
+            'region': data.get('location', {}).get('region'),
             'temperature': data.get('current', {}).get('temp_f'),
             'condition': data.get('current', {}).get('condition', {}).get('text'),
             'humidity': data.get('current', {}).get('humidity'),
