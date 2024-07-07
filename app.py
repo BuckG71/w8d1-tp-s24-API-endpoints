@@ -17,7 +17,6 @@ CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5500"}})  # Enable COR
 @app.route('/weather', methods=['GET'])
 def get_weather():
     query = request.args.get('query')
-    print(f"Received query: {query}")  # Debug print statement
     if not query:
         return jsonify({'error': 'Query parameter is required'}), 400
 
@@ -29,9 +28,7 @@ def get_weather():
     try:
         response = requests.get(BASE_URL, params=params, timeout=TIMEOUT)
         response.raise_for_status()
-        print(f"Weather API response: {response.json()}")  # Debug print statement
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching data from Weather API: {e}")  # Debug print statement
         return jsonify({'error': str(e)}), 500
 
     if response.status_code == 200:
@@ -44,7 +41,6 @@ def get_weather():
             'humidity': data.get('current', {}).get('humidity'),
             'wind_speed': data.get('current', {}).get('wind_mph')
         }
-        print(f"Weather data: {weather_data}")  # Debug print statement
         return jsonify(weather_data)
     else:
         return jsonify({'error': 'Unable to fetch weather data'}), response.status_code
